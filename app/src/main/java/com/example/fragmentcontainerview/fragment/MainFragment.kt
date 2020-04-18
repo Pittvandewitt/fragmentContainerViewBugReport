@@ -1,11 +1,13 @@
 package com.example.fragmentcontainerview.fragment
 
 import android.os.Bundle
+import androidx.annotation.Keep
+import androidx.preference.DialogPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.fragmentcontainerview.R
-import com.example.fragmentcontainerview.preference.CustomDialogPreference
 
+@Keep
 class MainFragment : PreferenceFragmentCompat() {
     /**
      * Called during [.onCreate] to supply the preferences for this fragment.
@@ -30,15 +32,10 @@ class MainFragment : PreferenceFragmentCompat() {
      */
     override fun onDisplayPreferenceDialog(preference: Preference?) {
         when (preference) {
-            is CustomDialogPreference ->
-                /**
-                 * The if check prevents opening the same fragment twice when the
-                 * preference is tapped multiple times quickly
-                 * */
-                if (parentFragmentManager.findFragmentById(R.id.nested_fragment) == null)
-                    CustomDialogPreference.DialogFragment.newInstance(preference.key)
-                        .also { it.setTargetFragment(this, 0) }
-                        .also { it.show(parentFragmentManager, null) }
+            is DialogPreference -> DialogFragment()
+                .apply { arguments = Bundle().apply { putString(argKey, preference.key) } }
+                .also { it.setTargetFragment(this, 0) }
+                .also { it.show(parentFragmentManager, null) }
             else -> super.onDisplayPreferenceDialog(preference)
         }
     }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.example.fragmentcontainerview.preference.CustomDialogPreference
+    <ListPreference
         android:key="foo"
+        android:dialogLayout="@layout/layout_with_fragment"
         android:title="launch a preference" />
 
 </androidx.preference.PreferenceScreen>

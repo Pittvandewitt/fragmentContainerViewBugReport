@@ -1,9 +1,11 @@
 package com.example.fragmentcontainerview.fragment
 
 import android.os.Bundle
+import androidx.annotation.Keep
 import androidx.preference.PreferenceFragmentCompat
 import com.example.fragmentcontainerview.R
 
+@Keep
 class NestedFragment : PreferenceFragmentCompat() {
     /**
      * Called during [.onCreate] to supply the preferences for this fragment.
